@@ -7,6 +7,14 @@ declare global {
 		// interface PageData {}
 		// interface Platform {}
 	}
+
+	namespace Lucia {
+		type Auth = import("./src/lib/server/auth/lucia.ts").Auth;
+		type DatabaseUserAttributes = {
+			email: string
+		};
+		type DatabaseSessionAttributes = {};
+	}
 }
 
 export {};
