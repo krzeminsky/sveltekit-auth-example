@@ -11,7 +11,7 @@
     let awaitingResponse = false;
 </script>
 
-<AuthForm bind:awaitingResponse onSubmit={(data, cancel) => {
+<AuthForm title="Sign up" bind:awaitingResponse onSubmit={(data, cancel) => {
     emailError = false;
     passwordError = false;
     

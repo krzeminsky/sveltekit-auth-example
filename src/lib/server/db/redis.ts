@@ -1,3 +1,4 @@
+// ? sudo service redis-server start
 import { createClient } from 'redis';
 import { sendMail } from '../services/nodemailer';
 

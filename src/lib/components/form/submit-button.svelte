@@ -5,7 +5,7 @@
     $: blockSubmit = disabled || awaitingResponse;
 </script>
 
-<button {disabled} class="w-full bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-full text-center transition-all {blockSubmit? 'pointer-events-none opacity-50' : ''}">
+<button {disabled} class="w-full bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-2xl text-center transition-all p-2 text-white {blockSubmit? 'pointer-events-none opacity-50' : ''}">
     {#if awaitingResponse}
     <div role="status" class="relative">
         <svg aria-hidden="true" class="w-6 h-6 mx-auto text-transparent animate-spin fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
