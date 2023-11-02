@@ -3,7 +3,6 @@
     import FormWrapper from "$lib/components/form/form-wrapper.svelte";
     import SubmitButton from "$lib/components/form/submit-button.svelte";
     import { AuthError } from "$lib/validation/auth-error";
-    import { map } from "zod";
 
     let error: AuthError = AuthError.None;
     let fields: HTMLInputElement[] = [];
@@ -57,6 +56,10 @@
             fields[currentField].focus();
         }
     }
+
+    function setError(e: unknown) {
+        error = e as AuthError;
+    }
 </script>
 
 <FormWrapper {error}>
@@ -68,11 +71,15 @@
 
         const code = fields.map(f => f.value).join('');
 
-        if (code.length != 6) cancel();
+        if (code.length != 6 || isNaN(Number(code))) cancel();
         else formData.set('code', code);
 
-        return async ({ update }) => {
+        return async ({ update, result }) => {
             await update({ reset: false });
+
+            if (result.type === "failure" && result.data) {
+                setError(result.data.error);
+            }
 
             awaitingResponse = false;
         }

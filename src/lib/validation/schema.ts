@@ -4,8 +4,3 @@ export const formSchema = z.object({
     email: z.string().email().max(255),
     password: z.string().min(8).regex(/.*[0-9].*/g).max(255),
 });
-
-export const verificationSchema = z.object({
-    email: z.string().email().max(255),
-    code: z.string().length(6),
-});
