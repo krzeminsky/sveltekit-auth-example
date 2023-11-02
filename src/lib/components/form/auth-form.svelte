@@ -24,13 +24,15 @@
             await update({ reset: false });
 
             if (result.type === "failure" && result.data) setError(result.data.error);
+
+            awaitingResponse = false;
         }
     }}>
         <h1 class="h-14 text-center text-5xl bg-clip-text text-transparent bg-gradient-to-tr from-indigo-500 to-purple-500">{title}</h1>
 
         <slot />
         
-        <SubmitButton />
+        <SubmitButton disabled={awaitingResponse} awaitingResponse={awaitingResponse} />
 
         <span class="text-center text-gray-400 pointer-events-none">Or continue with</span>
 

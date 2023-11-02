@@ -17,14 +17,14 @@
     
     const parseResult = formSchema.safeParse(Object.fromEntries(data));
 
-    confirmError = data.get('password') == data.get('confirmPassword');
+    confirmError = data.get('password') != data.get('confirmPassword');
 
     if (!parseResult.success) {
         const error = parseResult.error.flatten();
 
-        emailError = !error.fieldErrors.email;
-        passwordError = !error.fieldErrors.password;
-
+        emailError = !!error.fieldErrors.email;
+        passwordError = !!error.fieldErrors.password;
+        
         cancel();
     } else if (confirmError) cancel();
 }}>

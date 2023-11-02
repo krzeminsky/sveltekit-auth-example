@@ -29,4 +29,8 @@ db.prepare(`
     )
 `).run();
 
+export function getUserIdByEmail(email: string) {
+    return db.prepare("SELECT id FROM user AS u WHERE u.email = ?").get(email) as string|undefined;
+}
+
 export { db as database } 

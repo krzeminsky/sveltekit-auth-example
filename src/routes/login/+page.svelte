@@ -19,8 +19,8 @@
     if (!parseResult.success) {
         const error = parseResult.error.flatten();
 
-        emailError = !error.fieldErrors.email;
-        passwordError = !error.fieldErrors.password;
+        emailError = !!error.fieldErrors.email;
+        passwordError = !!error.fieldErrors.password;
 
         cancel();
     }

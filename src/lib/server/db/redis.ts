@@ -41,6 +41,8 @@ export async function updateTokens(ip: string) {
         return true;
     }
 
+    await client.set(ip, JSON.stringify(bucket));
+
     return false;
 }
 
@@ -68,4 +70,8 @@ export async function getVerificationCode(email: string) {
     if (!cachedCode) return null;
 
     return JSON.parse(cachedCode) as VerificationCode;
+}
+
+export function deleteCode(email: string) {
+    return client.del(email);
 }

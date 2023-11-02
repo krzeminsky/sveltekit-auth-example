@@ -29,6 +29,8 @@
             required
             on:input
         />
+
+        <slot />
     </div>
 
     <small class="text-gray-400 {invalid? 'text-red-500' : ''}">{description}</small>

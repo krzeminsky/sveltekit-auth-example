@@ -1,5 +1,6 @@
 import { auth } from '$lib/server/auth/lucia.js';
-import { createAndSendVerificationCode, getVerificationCode, updateTokens } from '$lib/server/db/redis.js'
+import { getUserIdByEmail } from '$lib/server/db/database.js';
+import { deleteCode, getVerificationCode, updateTokens } from '$lib/server/db/redis.js'
 import { AuthError } from '$lib/validation/auth-error.js'
 import { fail, redirect } from '@sveltejs/kit'
 
@@ -20,18 +21,35 @@ export const actions = {
         else if (verificationCode.c != code) return fail(400, { error: AuthError.WrongCode });
 
         try {
-            // TODO: implement account creation when google oauth is done
+            const userId = getUserIdByEmail(email);
 
-            // * test for scenario where user tries to link email|password to an existing account made with google
+            if (!userId) { // ? No account exists
+                await auth.createUser({
+                    key: {
+                        providerId: "email",
+                        providerUserId: email,
+                        password: verificationCode.p
+                    },
 
-            /*
-            const key = await auth.useKey("email", parsedData.data.email, code.p);
+                    attributes: { 
+                        email
+                    }
+                });
+            } else {
+                await auth.createKey({
+                    userId,
+                    providerId: "email",
+                    providerUserId: email,
+                    password: verificationCode.p
+                });
+            }
+
+            const key = await auth.useKey("email", email, verificationCode.p);
             const session = await auth.createSession({ userId: key.userId, attributes: { } });
 
             auth.handleRequest(event).setSession(session);
-            */
 
-            throw Error;
+            await deleteCode(email);
         } catch {
             return fail(400, { error: AuthError.Unknown });
         }

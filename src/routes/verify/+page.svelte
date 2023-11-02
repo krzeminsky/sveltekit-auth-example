@@ -54,6 +54,8 @@
 
             currentField = code.length - 1;
             fields[currentField].focus();
+
+            disabled = code.length != 6;
         }
     }
 
