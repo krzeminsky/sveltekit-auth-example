@@ -3,11 +3,11 @@
     export let label: string;
     export let placeholder = "";
     export let type = "text";
-    export let disabled = false;
     export let autocomplete = "nope";
 
     export let description = "";
 
+    export let disabled = false;
     export let invalid = false;
 </script>
 

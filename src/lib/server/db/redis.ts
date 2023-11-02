@@ -14,7 +14,7 @@ type Bucket = {
 }
 
 type VerificationCode = {
-    c: number; // ? code
+    c: string; // ? code
     p: string; // ? password linked to this verification
 }
 
@@ -22,6 +22,8 @@ const client = createClient();
 client.on('error', err => console.log('Redis Client Error', err));
 await client.connect();
 
+// ! linking rate limit tokens to ip is probably a bad idea because multiple users can be behind the same ip
+// TODO: Change in the future, works great for testing
 export async function updateTokens(ip: string) {
     const cachedValue = await client.get(ip);
     const timestamp = Date.now();
@@ -41,8 +43,8 @@ export async function updateTokens(ip: string) {
     return false;
 }
 
-export async function createVerificationCode(email: string, password: string) {
-    const code = Math.floor(100_000 + Math.random() * 900_000);
+export async function createAndSendVerificationCode(email: string, password: string) {
+    const code = Math.floor(100_000 + Math.random() * 900_000).toString();
 
     await client.set(email, JSON.stringify({ c: code, p: password } as VerificationCode));
     await client.expire(email, VERIFICATION_CODE_EXPIRE_TIME);
@@ -51,7 +53,15 @@ export async function createVerificationCode(email: string, password: string) {
     await sendMail(email, `Your verification code is ${code}`);
 }
 
-export async function getVerificationCode(email: string, code: string) {
+/*
+? check note in /verify/+page.server.ts
+export async function updateVerificationCodePassword(email: string, code: string, newPassword: string) {
+    await client.set(email, JSON.stringify({ c: code, p: newPassword } as VerificationCode));
+    await client.expire(email, VERIFICATION_CODE_EXPIRE_TIME);
+}
+*/
+
+export async function getVerificationCode(email: string) {
     const cachedCode = await client.get(email);
 
     if (!cachedCode) return null;

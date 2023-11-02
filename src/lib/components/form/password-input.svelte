@@ -3,7 +3,6 @@
 
     export let description = "";
     export let invalid = false;
-
     export let disabled = false;
 
     let showPassword = false;

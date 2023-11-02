@@ -6,8 +6,9 @@
 
     export let onSubmit: (data: FormData, cancel: () => void) => void;
 
+    export let awaitingResponse = false;
+
     let error: AuthError = AuthError.None;
-    let awaitingResponse = false;
 
     // ? svelte inline typescript is stupid 
     function setError(e: unknown) { error = e as AuthError; } 
