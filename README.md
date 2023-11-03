@@ -13,7 +13,6 @@ To make one yourself, follow this guide on stackoverflow https://stackoverflow.c
 ```env
 DATABASE_PATH=""
 SENDER_EMAIL=""
-TEST_RECEIVER_EMAIL=""
 GMAIL_PASS=""
 GOOGLE_CLIENT_ID=""
 GOOGLE_CLIENT_SECRET=""
