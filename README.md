@@ -1,4 +1,4 @@
-# SvelteKit email/password+Google example
+# SvelteKit email/password/verification code + Google example
 Made with lucia, better-sqlite3, redis, nodemailer and tailwindcss.
 
 ## redis
