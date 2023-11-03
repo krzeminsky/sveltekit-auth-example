@@ -15,7 +15,7 @@
     <title>Sign up</title>
 </svelte:head>
 
-<AuthForm title="Sign up" counterPageRoute="/login" counterPageMessage="Log in instead" bind:awaitingResponse onSubmit={(data, cancel) => {
+<AuthForm title="Sign up" counterPageRoute="/login" counterPageMessage="Log in" bind:awaitingResponse onSubmit={(data, cancel) => {
     emailError = false;
     passwordError = false;
     

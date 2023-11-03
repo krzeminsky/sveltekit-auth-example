@@ -50,10 +50,10 @@ export const actions = {
             auth.handleRequest(event).setSession(session);
 
             await deleteCode(email);
-        } catch {
+        } catch (e) {
             return fail(400, { error: AuthError.Unknown });
         }
 
-        throw redirect(302, `/${event.url.searchParams.get('returnTo')??'profile'}`);
+        throw redirect(302, `/${event.url.searchParams.get('returnTo')??'account'}`);
     }
 }

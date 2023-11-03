@@ -18,7 +18,7 @@
 </script>
 
 <FormWrapper {error}>
-    <form class="w-72 flex flex-col gap-4" method="post" use:enhance={({ formData, cancel }) => {
+    <form class="w-72 flex flex-col items-center gap-4" method="post" use:enhance={({ formData, cancel }) => {
         awaitingResponse = true;
 
         onSubmit(formData, () => { cancel(); awaitingResponse = false; })
@@ -37,13 +37,13 @@
         
         <SubmitButton disabled={awaitingResponse} awaitingResponse={awaitingResponse} />
 
-        <a href="{counterPageRoute}" class="text-center text-gray-400">{counterPageMessage}</a>
+        <a href="{counterPageRoute}" class="w-fit underline text-center text-gray-400">{counterPageMessage}</a>
 
         <span class="text-center text-gray-400 pointer-events-none">Or continue with</span>
 
         <!--Flex container in case you want to add more oauth providers-->
         <div class="flex justify-center gap-4">
-            <a href="placeholder"><img src="https://www.google.com/favicon.ico" alt="Continue with google"/></a>
+            <a href="login/google"><img src="https://www.google.com/favicon.ico" alt="Continue with google"/></a>
         </div>
     </form>
 </FormWrapper>

@@ -27,7 +27,10 @@ export const auth = lucia({
 export const googleAuth = google(auth, {
     clientId: env.GOOGLE_CLIENT_ID,
     clientSecret: env.GOOGLE_CLIENT_SECRET,
-    redirectUri: "todo"
+    redirectUri: env.GOOGLE_REDIRECT_URI,
+    scope: [
+        "https://www.googleapis.com/auth/userinfo.email"
+    ]
 });
 
 export type Auth = typeof auth;
