@@ -5,4 +5,5 @@ export const load = (async (event) => {
     if (!updateTokens(event.getClientAddress())) return;
     
     const session = await auth.handleRequest(event).validate();
+    if (session) return { user: session.user }
 });

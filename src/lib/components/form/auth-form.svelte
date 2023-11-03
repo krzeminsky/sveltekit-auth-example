@@ -5,6 +5,9 @@
     import SubmitButton from "./submit-button.svelte";
 
     export let title: string;
+    export let counterPageRoute: string;
+    export let counterPageMessage: string;
+
     export let onSubmit: (data: FormData, cancel: () => void) => void;
     export let awaitingResponse = false;
 
@@ -33,6 +36,8 @@
         <slot />
         
         <SubmitButton disabled={awaitingResponse} awaitingResponse={awaitingResponse} />
+
+        <a href="{counterPageRoute}" class="text-center text-gray-400">{counterPageMessage}</a>
 
         <span class="text-center text-gray-400 pointer-events-none">Or continue with</span>
 

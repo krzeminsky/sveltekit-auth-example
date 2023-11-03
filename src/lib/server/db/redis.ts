@@ -34,14 +34,14 @@ export async function updateTokens(ip: string) {
         bucket.c = TOKEN_COUNT - 1;
         bucket.t = timestamp;
 
+        await client.set(ip, JSON.stringify(bucket));
         return true;
     } else if (bucket.c > 0) {
         bucket.c--;
 
+        await client.set(ip, JSON.stringify(bucket));
         return true;
-    }
-
-    await client.set(ip, JSON.stringify(bucket));
+    } 
 
     return false;
 }

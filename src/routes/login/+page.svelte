@@ -10,7 +10,11 @@
     let awaitingResponse = false;
 </script>
 
-<AuthForm title="Log in" bind:awaitingResponse onSubmit={(data, cancel) => {
+<svelte:head>
+    <title>Log in</title>
+</svelte:head>
+
+<AuthForm title="Log in" counterPageRoute="/signup" counterPageMessage="Sign up instead" bind:awaitingResponse onSubmit={(data, cancel) => {
     emailError = false;
     passwordError = false;
     

@@ -64,6 +64,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Verify</title>
+</svelte:head>
+
 <FormWrapper {error}>
     <h1 class="h-14 text-center text-5xl bg-clip-text text-transparent bg-gradient-to-tr from-indigo-500 to-purple-500">Verify your account</h1>
     <h2 class="text-center text-lg">A code has been sent to your email adress. Enter it below.</h2>
