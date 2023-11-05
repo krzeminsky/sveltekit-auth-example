@@ -1,6 +1,8 @@
 # SvelteKit email/password/verification code + Google auth example
 Made with lucia, better-sqlite3, redis, nodemailer and tailwindcss.
 
+Rate limiting included ⭐
+
 ## redis
 Start a linux redis server using `sudo service redis-server start`.
 
